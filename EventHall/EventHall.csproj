@@ -92,7 +92,9 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Context\DatabaseInitializer.cs" />
-    <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\PartyRoomController.cs" />
+    <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Enums\TypePartyRoom.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

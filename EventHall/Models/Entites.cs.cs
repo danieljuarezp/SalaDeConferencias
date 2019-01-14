@@ -47,5 +47,6 @@ namespace EventHall.Models
         public double CurrentBalance { get; set; }
         [RegularExpression(@"^[0-9]{11,}$")]
         public long PhoneNumber { get; set; }
+        public ICollection<Reservation> Reservations { get; set; }
     }
 }
