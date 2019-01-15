@@ -91,7 +91,7 @@ export class GetCustomersComponent implements OnInit {
     });
   }
 
-  DeleteCustomer(id) {
+  DeleteCustomer(customerId: number) {
     Swal({
       title: 'Eliminar cliente!',
       text: '¿Esta seguro de eliminar este cliente?',
@@ -102,7 +102,7 @@ export class GetCustomersComponent implements OnInit {
       confirmButtonText: 'Eliminar'
     }).then((result) => {
       if (result.value) {
-        const url = `${this.urlService}/DeleteCustomerById/${id}`;
+        const url = `${this.urlService}/DeleteCustomerById/${customerId}`;
 
         fetch(url)
         .then(resp => {
@@ -118,6 +118,13 @@ export class GetCustomersComponent implements OnInit {
         .catch(console.error);
       }
     });
+  }
+
+  GetLastTenReservation(customerId: number) {
+    const url = `${this.urlService}/GetLastTenReservationByCustomerId/${customerId}`;
+    fetch(url)
+    .then(console.log)
+    .catch(console.error);
   }
 
 }

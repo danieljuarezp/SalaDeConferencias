@@ -23,6 +23,7 @@
                 <th scope="col">Número de Identificacion</th>
                 <th scope="col">Número de telefono</th>
                 <th scope="col">Saldo actual</th>
+                <th scope="col">Últimas Reservaciones</th>
                 <th scope="col">Editar</th>
                 <th scope="col">Eliminar</th>
               </tr>
@@ -33,6 +34,7 @@
                 <td>{{customer.identificationNumber}}</td>
                 <td>{{customer.phoneNumber}}</td>
                 <td>${{customer.currentBalance}}</td>
+                <td><button class="btn btn-primary" (click)="GetLastTenReservation(customer.customerId)"><i class="fas fa-search"></i></button></td>
                 <td><button class="btn btn-primary" (click)="UpdateCustomer(customer)"><i class="fas fa-user-edit"></i></button></td>
                 <td><button class="btn btn-primary" (click)="DeleteCustomer(customer.customerId)"><i class="fas fa-times"></i></button></td>
               </tr>            

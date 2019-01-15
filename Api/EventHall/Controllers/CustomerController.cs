@@ -81,9 +81,8 @@ namespace EventHall.Controllers
         {
             try
             {
-                Customer customer = db.Customers.FirstOrDefault(q => q.CustomerId == id);
-                IEnumerable<Reservation> lastReservations = customer.Reservations.OrderByDescending(q => q.ReservationId).Take(10);
-                return Ok(lastReservations);
+                var reservations = db.Reservations.Where(q => q.CustomerId == id).OrderByDescending(q => q.ReservationId).Take(10);
+                return Ok(reservations);
             }
             catch (Exception)
             {
