@@ -9,6 +9,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AddCustomerComponent } from './components/customer/add-customer/add-customer.component';
 import { GetCustomersComponent } from './components/customer/get-customers/get-customers.component';
 import { AddPartyRoomComponent } from './components/party-room/add-party-room/add-party-room.component';
+import { GetPartyRoomsComponent } from './components/party-room/get-party-rooms/get-party-rooms.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AddPartyRoomComponent } from './components/party-room/add-party-room/ad
     HomeComponent,
     AddCustomerComponent,
     GetCustomersComponent,
-    AddPartyRoomComponent
+    AddPartyRoomComponent,
+    GetPartyRoomsComponent
   ],
   imports: [
     BrowserModule,

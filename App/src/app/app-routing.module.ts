@@ -4,6 +4,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AddCustomerComponent } from './components/customer/add-customer/add-customer.component';
 import { GetCustomersComponent } from './components/customer/get-customers/get-customers.component';
 import { AddPartyRoomComponent } from './components/party-room/add-party-room/add-party-room.component';
+import { GetPartyRoomsComponent } from './components/party-room/get-party-rooms/get-party-rooms.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/Home', pathMatch: 'full' },
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'AgregarCliente', component: AddCustomerComponent },
   { path: 'ConsultarClientes', component: GetCustomersComponent },
   { path: 'AgregarSalon', component: AddPartyRoomComponent },
+  { path: 'ConsultarSalones', component: GetPartyRoomsComponent },
 ];
 
 @NgModule({
