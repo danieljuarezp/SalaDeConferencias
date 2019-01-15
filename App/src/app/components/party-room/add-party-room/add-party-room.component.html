@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="display-4">Agregar un nuevo salon!</h1>
+        <br>
+        <form [formGroup]="form" (ngSubmit)="SavePartyRoom()">
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="PartyRoomName" placeholder="Nombre" [ngClass]="{ 'error': !form.controls['PartyRoomName'].valid && form.dirty}">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="PartyRoomDescription" placeholder="Descripcion" [ngClass]="{ 'error': !form.controls['PartyRoomDescription'].valid && form.dirty}">
+            </div>
+            <div class="form-group">
+                <select class="form-control" formControlName="PartyRoomType">
+                    <option [value]="type.value" *ngFor="let type of types" >{{type.key}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label >Pantallas</label>
+                <input type="checkbox" class="form-control" formControlName="PartyRoomScreens">
+            </div>
+            <div class="form-group">
+                <label >Equipo de sonido</label>
+                <input type="checkbox" class="form-control" formControlName="PartyRoomSound">
+            </div>
+            <div class="form-group">
+                 <label >Aire acondicionado</label>
+                <input type="checkbox" class="form-control" formControlName="PartyRoomAirConditioner">
+            </div>
+            <div class="form-group">
+                <label >Video Beam</label>
+                <input type="checkbox" class="form-control" formControlName="PartyRoomVideoBeam">
+            </div>
+            <div class="form-group">
+                <label >Butacas de lujo</label>
+                <input type="checkbox" class="form-control" formControlName="PartyRoomLuxuryArmchairs">
+            </div>
+            <div class="form-group">
+                <input type="number" class="form-control" formControlName="PartyRoomPricePerHour" placeholder="Precio por hora de alquiler" [ngClass]="{ 'error': !form.controls['PartyRoomPricePerHour'].valid && form.dirty}">
+            </div>
+            <button type="submit" class="btn btn-primary"> Guardar</button>
+        </form>
+    </div>
+    </div>
