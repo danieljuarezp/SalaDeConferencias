@@ -103,7 +103,6 @@ namespace EventHall.Controllers
                 oldCustomer.Name = customerToUpdate.Name;
                 oldCustomer.IdentificationNumber = customerToUpdate.IdentificationNumber;
                 oldCustomer.PhoneNumber = customerToUpdate.PhoneNumber;
-                oldCustomer.CurrentBalance = customerToUpdate.CurrentBalance;
 
                 db.SaveChanges();
 

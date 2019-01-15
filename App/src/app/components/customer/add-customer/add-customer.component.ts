@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from 'src/app/models/customer.model';
-declare let mdtoast: any;
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-customer',
@@ -50,12 +50,16 @@ export class AddCustomerComponent implements OnInit {
       body: JSON.stringify(newCustomer)
       })
     .then(resul => resul.json())
-    .then(customer =>{
+    .then(customer => {
       console.log(customer);
       (<HTMLInputElement>document.getElementById('CustomerName')).value = '';
       (<HTMLInputElement>document.getElementById('IdentificationNumber')).value = '';
       (<HTMLInputElement>document.getElementById('PhoneNumber')).value = '';
-      mdtoast('Cliente creado con exito', { duration: 1000, type: mdtoast.SUCCESS });
+      Swal(
+        'Creado!',
+        'Cliente creado con exito!',
+        'success'
+      );
     })
     .catch(console.error);
   }

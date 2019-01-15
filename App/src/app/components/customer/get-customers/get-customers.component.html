@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="display-4">Listado de clientes!</h1>
+        <br> 
+
+        <div class="row animated fadeIn" *ngIf="loading">
+            <div class="col-sm-12">
+                <div class="alert alert-default text-center">
+                    <strong>Cargando...</strong>
+                    <br>
+                    <i class="fa fa-refresh fa-spin fa-2x"></i>
+                    <br>
+                    <span>Un momento</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+        <table class="table" *ngIf="!loading">
+            <thead>
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Número de Identificacion</th>
+                <th scope="col">Número de telefono</th>
+                <th scope="col">Saldo actual</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Eliminar</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let customer of customers; let i = index">
+              <tr>
+                <th scope="row">{{customer.name}}</th>
+                <td>{{customer.identificationNumber}}</td>
+                <td>{{customer.phoneNumber}}</td>
+                <td>${{customer.currentBalance}}</td>
+                <td><button class="btn btn-primary" (click)="UpdateCustomer(customer)"><i class="fas fa-user-edit"></i></button></td>
+                <td><button class="btn btn-primary" (click)="DeleteCustomer(customer.customerId)"><i class="fas fa-times"></i></button></td>
+              </tr>            
+            </tbody>
+          </table>     
+        </div>     
+    </div>
+</div>
