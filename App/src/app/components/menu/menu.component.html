@@ -1,7 +1,32 @@
 <div class="btn-group" role="group">
-    <button type="button" class="btn btn-primary btn-group-lg" routerLink="/Home">Home</button>
-    <button type="button" class="btn btn-primary btn-group-lg" routerLink="/Salones">Salones</button>
-    <button type="button" class="btn btn-primary btn-group-lg" routerLink="/Clientes">Clientes</button>
-    <button type="button" class="btn btn-primary btn-group-lg" routerLink="/Reservaciones">Reservaciones</button>
+    <button type="button" class="btn btn-secondary btn-group-lg" routerLink="/Home">Home</button>
+    
+    <div class="btn-group" role="group">
+            <button id="Customers" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">Clientes</button>
+            <div class="dropdown-menu" aria-labelledby="Customers">
+              <a class="dropdown-item" routerLink="/AgregarCliente">Agregar Clientes</a>
+              <a class="dropdown-item" routerLink="/ConsultarClientes">Consultar Clientes</a>             
+            </div>
+     </div>
+
+    <div class="btn-group" role="group">
+            <button id="PartyRoom" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">Salones</button>
+            <div class="dropdown-menu" aria-labelledby="PartyRoom">
+              <a class="dropdown-item" routerLink="/AgregarSalones">Agregar Salones</a>
+              <a class="dropdown-item" routerLink="/ConsultarSalones">Consultar Salones</a>
+            </div>
+     </div>
+
+     <div class="btn-group" role="group">
+            <button id="Reservations" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">Reservaciones</button>
+            <div class="dropdown-menu" aria-labelledby="Reservations">
+                    <a class="dropdown-item" routerLink="/ReservacionesPorClientes">Ultimas 10 reservaciones por cliente</a>
+                    <a class="dropdown-item" routerLink="/ReservacionesPorConfirmar">Reservas pendientes por confirmar</a>
+                    <a class="dropdown-item" routerLink="/ReservacionesPorPagar">Reservas pendientes por pagar</a>
+                    <a class="dropdown-item" routerLink="/ConfirmarReservacion">Confirmar una reservación</a>
+                    <a class="dropdown-item" routerLink="/PagarReservacion">Pagar una reservación</a>
+            </div>
+     </div>
+
 </div>
 

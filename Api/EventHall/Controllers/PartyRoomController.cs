@@ -6,9 +6,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using EventHall.Models;
+using System.Web.Http.Cors;
 
 namespace EventHall.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PartyRoomController : ApiController
     {
         private DatabaseContext db = new DatabaseContext();

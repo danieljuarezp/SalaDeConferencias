@@ -1,0 +1,21 @@
+<div class="row">
+<div class="col-md-12">
+    <h1 class="display-4">Agregar un nuevo cliente!</h1>
+    <br>
+    <form >
+        <div class="form-group">
+          <input type="text" class="form-control" id="CustomerName" placeholder="Nombre" required>
+          <span class="help-block text-danger hidden" id="InvalidName">Ingresa un nombre</span>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="IdentificationNumber" placeholder="Número de Identificacion" required>
+          <span class="help-block text-danger hidden" id="InvalidID">Ingresa un número de identificacion valido (9-10 caracteres)</span>
+        </div>
+        <div class="form-group">
+            <input type="tel" class="form-control" id="PhoneNumber" placeholder="Número de telefono" required>
+            <span class="help-block text-danger hidden" id="InvalidNumber">Ingresa un número de telefono valido (11 digitos)</span>
+          </div>
+        <button type="button" class="btn btn-primary" (click)="onSubmit()"> Guardar</button>
+    </form>
+</div>
+</div>
