@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from 'src/app/models/customer.model';
 import Swal from 'sweetalert2';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-customer',
@@ -8,39 +9,37 @@ import Swal from 'sweetalert2';
   styleUrls: ['./add-customer.component.css']
 })
 export class AddCustomerComponent implements OnInit {
-  urlService = 'http://localhost:59723/api/Customer';
 
-  constructor() {}
+  urlService = 'http://localhost:59723/api/Customer';
+  form: FormGroup;
+
+  constructor() {
+    this.form = new FormGroup({
+      'CustomerName': new FormControl('', Validators.required),
+      'CustomerIdentificationNumber': new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9]{9,10}$')]),
+      'CustomerPhoneNumber': new FormControl('',  [Validators.required, Validators.pattern('^[0-9]{11,}$')])
+    });
+  }
 
   ngOnInit() {}
 
-  onSubmit() {
+  SaveCustomer() {
+    if (this.form.invalid) {
+      Swal(
+        'Error!',
+        'Todos los campos son requeridos!',
+        'error'
+      );
+      return;
+    }
+
     const url = `${this.urlService}/CreateCustomer`;
 
-    const name = (<HTMLInputElement>document.getElementById('CustomerName')).value.trim();
-    if (name.length === 0) {
-      document.getElementById('InvalidName').classList.remove('hidden');
-      return;
-    }
-    document.getElementById('InvalidName').classList.add('hidden');
-
-    const regExpID = new RegExp('^[a-zA-Z0-9]{9,10}$');
-    const ID = (<HTMLInputElement>document.getElementById('IdentificationNumber')).value.trim();
-    if (!regExpID.test(ID)) {
-      document.getElementById('InvalidID').classList.remove('hidden');
-      return;
-    }
-    document.getElementById('InvalidID').classList.add('hidden');
-
-    const regExpNumber = new RegExp('^[0-9]{11,}$');
-    const phoneNumber = (<HTMLInputElement>document.getElementById('PhoneNumber')).value.trim();
-    if (!regExpNumber.test(phoneNumber)) {
-      document.getElementById('InvalidNumber').classList.remove('hidden');
-      return;
-    }
-    document.getElementById('InvalidNumber').classList.add('hidden');
-
-    const newCustomer = new Customer(name, ID, 0, Number(phoneNumber));
+    const newCustomer = new Customer(
+      this.form.value['CustomerName'],
+      this.form.value['CustomerIdentificationNumber'],
+      0,
+      Number(this.form.value['CustomerPhoneNumber']));
 
     fetch(url, {
       method: 'POST',
@@ -51,15 +50,12 @@ export class AddCustomerComponent implements OnInit {
       })
     .then(resul => resul.json())
     .then(customer => {
-      console.log(customer);
-      (<HTMLInputElement>document.getElementById('CustomerName')).value = '';
-      (<HTMLInputElement>document.getElementById('IdentificationNumber')).value = '';
-      (<HTMLInputElement>document.getElementById('PhoneNumber')).value = '';
       Swal(
         'Creado!',
         'Cliente creado con exito!',
         'success'
       );
+      this.form.reset();
     })
     .catch(console.error);
   }

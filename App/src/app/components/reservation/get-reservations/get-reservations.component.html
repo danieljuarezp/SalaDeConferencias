@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-md-12">
+      <h1 class="display-4">Listado de reservaciones!</h1>
+      <br> 
+
+      <div class="row animated fadeIn" *ngIf="loading">
+          <div class="col-sm-12">
+              <div class="alert alert-default text-center">
+                  <strong>Cargando...</strong>
+                  <br>
+                  <i class="fa fa-refresh fa-spin fa-2x"></i>
+                  <br>
+                  <span>Un momento</span>
+              </div>
+          </div>
+      </div>
+
+      <div class="table-responsive">
+      <table class="table" *ngIf="!loading">
+          <thead>
+            <tr>
+              <th scope="col">Salon</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Fecha de inicio</th>
+              <th scope="col">Fecha de fin</th>
+              <th scope="col">Precio total</th>
+              <th scope="col">Pagada</th>
+              <th scope="col">Confirmada</th>
+              <th scope="col">Editar</th>
+              <th scope="col">Eliminar</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let reservation of reservations">
+            <tr>
+              <th scope="row">{{ GetPartyRoomName(reservation.partyRoomId) }}</th>
+              <td>{{ GetCustomerName(reservation.customerId) }}</td>
+              <td>{{reservation.startTime | date: 'dd/MM/yyyy hh:mm'}}</td>
+              <td>{{reservation.endTime | date: 'dd/MM/yyyy hh:mm'}}</td>
+              <td>${{reservation.totalPrice}}</td>
+              <td>{{ reservation.alreadyPaid ? "Si" : "No" }}</td>
+              <td>{{reservation.confirmed ? "Si" : "No" }}</td>
+              <td><button class="btn btn-primary" (click)="UpdateReservation(reservation)"><i class="fas fa-user-edit"></i></button></td>
+              <td><button class="btn btn-primary" (click)="DeleteReservation(reservation.reservationId)"><i class="fas fa-times"></i></button></td>
+            </tr>            
+          </tbody>
+        </table>     
+      </div>     
+  </div>
+</div>

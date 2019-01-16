@@ -11,4 +11,4 @@ export class PartyRoom {
       public PricePerHour: number,
       public PartyRoomId?: number
     ) {}
-  }
+}

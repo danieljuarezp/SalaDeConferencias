@@ -23,17 +23,17 @@ namespace EventHall.Controllers
         {
             try
             {
-                bool itsBusy = db.Reservations.Any(q => q.PartyRoomId == newReservation.PartyRoomId && q.EndTime <= newReservation.StartTime);
-
+                bool itsBusy = db.Reservations.Any(q => q.PartyRoomId == newReservation.PartyRoomId && q.EndTime >= newReservation.StartTime);
 
                 if (itsBusy)
                 {
-                    return BadRequest();
+                    return BadRequest("El salon se encuentra ocupado");
                 }
 
                 if ((newReservation.StartTime.Hour <= 7) || (newReservation.EndTime.Hour >= 22))
                 {
-                    return BadRequest();
+                    int hour = (newReservation.StartTime.Hour <= 7) ? newReservation.StartTime.Hour : newReservation.EndTime.Hour;
+                    return BadRequest($"No se puede crear una reservacion en este horario {hour}");
                 }
 
 
@@ -129,8 +129,6 @@ namespace EventHall.Controllers
             try
             {
                 Reservation oldReservation = db.Reservations.FirstOrDefault(q => q.ReservationId == reservationToUpdate.ReservationId);
-                oldReservation.AlreadyPaid = reservationToUpdate.AlreadyPaid;
-                oldReservation.Confirmed = reservationToUpdate.Confirmed;
                 oldReservation.CustomerId = reservationToUpdate.CustomerId;
                 oldReservation.EndTime = reservationToUpdate.EndTime;
                 oldReservation.PartyRoomId = reservationToUpdate.PartyRoomId;
@@ -166,13 +164,12 @@ namespace EventHall.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult PayReservation(int id, double money)
+        public IHttpActionResult PayReservation(int id)
         {
             try
             {
                 Reservation reservation = db.Reservations.FirstOrDefault(q => q.ReservationId == id);
-                reservation.Confirmed = true;
-                reservation.TotalPrice -= money;
+                reservation.AlreadyPaid = true;
 
                 db.SaveChanges();
 
@@ -192,6 +189,10 @@ namespace EventHall.Controllers
             try
             {
                 Reservation reservation = db.Reservations.FirstOrDefault(q => q.ReservationId == id);
+                if (reservation.AlreadyPaid || reservation.Confirmed)
+                {
+                    return BadRequest("No se puede eliminar esta reservacion porque ya fue pagada y/o confirmada");
+                }
                 db.Reservations.Remove(reservation);
                 db.SaveChanges();
                 return Ok();

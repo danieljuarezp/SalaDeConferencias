@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="display-4">Listado de reservaciones sin confirmar!</h1>
+        <br> 
+  
+        <div class="row animated fadeIn" *ngIf="loading">
+            <div class="col-sm-12">
+                <div class="alert alert-default text-center">
+                    <strong>Cargando...</strong>
+                    <br>
+                    <i class="fa fa-refresh fa-spin fa-2x"></i>
+                    <br>
+                    <span>Un momento</span>
+                </div>
+            </div>
+        </div>
+  
+        <div class="table-responsive">
+        <table class="table" *ngIf="!loading">
+            <thead>
+              <tr>
+                <th scope="col">Salon</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Fecha de inicio</th>
+                <th scope="col">Fecha de fin</th>
+                <th scope="col">Precio total</th>
+                <th scope="col">Confirmar</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let reservation of reservations">
+              <tr>
+                <th scope="row">{{ GetPartyRoomName(reservation.partyRoomId) }}</th>
+                <td>{{GetCustomerName(reservation.customerId)}}</td>
+                <td>{{reservation.startTime | date: 'dd/MM/yyyy hh:mm' }}</td>
+                <td>{{reservation.endTime | date: 'dd/MM/yyyy hh:mm' }}</td>
+                <td>${{reservation.totalPrice}}</td>
+                <td><button class="btn btn-primary" (click)="ConfirmReservation(reservation.reservationId)"><i class="fas fa-check"></i></button></td>
+              </tr>            
+            </tbody>
+          </table>     
+        </div>     
+    </div>
+  </div>

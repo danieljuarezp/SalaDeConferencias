@@ -15,29 +15,25 @@
                 </select>
             </div>
             <div class="form-group">
-                <label >Pantallas</label>
-                <input type="checkbox" class="form-control" formControlName="PartyRoomScreens">
-            </div>
-            <div class="form-group">
-                <label >Equipo de sonido</label>
-                <input type="checkbox" class="form-control" formControlName="PartyRoomSound">
-            </div>
-            <div class="form-group">
-                 <label >Aire acondicionado</label>
-                <input type="checkbox" class="form-control" formControlName="PartyRoomAirConditioner">
-            </div>
-            <div class="form-group">
-                <label >Video Beam</label>
-                <input type="checkbox" class="form-control" formControlName="PartyRoomVideoBeam">
-            </div>
-            <div class="form-group">
-                <label >Butacas de lujo</label>
-                <input type="checkbox" class="form-control" formControlName="PartyRoomLuxuryArmchairs">
-            </div>
-            <div class="form-group">
                 <input type="number" class="form-control" formControlName="PartyRoomPricePerHour" placeholder="Precio por hora de alquiler" [ngClass]="{ 'error': !form.controls['PartyRoomPricePerHour'].valid && form.dirty}">
             </div>
+            <div class="checkbox">
+                <label>Pantallas<input type="checkbox" class="form-control" formControlName="PartyRoomScreens"></label>
+            </div>
+            <div class="checkbox">
+                <label >Equipo de sonido<input type="checkbox" class="form-control" formControlName="PartyRoomSound"></label>
+            </div>
+            <div class="checkbox">
+                 <label >Aire acondicionado<input type="checkbox" class="form-control" formControlName="PartyRoomAirConditioner"></label>
+            </div>
+            <div class="checkbox">
+                <label >Video Beam<input type="checkbox" class="form-control" formControlName="PartyRoomVideoBeam"></label>
+            </div>
+            <div class="checkbox">
+                <label >Butacas de lujo<input type="checkbox" class="form-control" formControlName="PartyRoomLuxuryArmchairs"></label>
+            </div>
+            
             <button type="submit" class="btn btn-primary"> Guardar</button>
         </form>
     </div>
-    </div>
+</div>

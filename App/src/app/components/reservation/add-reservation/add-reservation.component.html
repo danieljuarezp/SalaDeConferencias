@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="display-4">Agregar una reservacion!</h1>
+        <br>
+        <form [formGroup]="form" (ngSubmit)="SaveReservation()">
+            <div class="form-group">
+              <label>Salon</label>
+                <select class="form-control" formControlName="ReservationPartyRoom">
+                    <option [value]="partyRoom.partyRoomId" *ngFor="let partyRoom of partyRooms" >{{partyRoom.name}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Cliente</label>
+                <select class="form-control" formControlName="ReservationCustomers">
+                    <option [value]="customer.customerId" *ngFor="let customer of customers" >{{customer.name}}</option>
+                </select>
+            </div>
+
+            <angular2-date-picker formControlName="ReservationStartTime" [(ngModel)]="startDate" [settings]="settings"></angular2-date-picker>
+
+            <angular2-date-picker formControlName="ReservationEndTime" [(ngModel)]="endDate" [settings]="settings"></angular2-date-picker>
+
+            <div class="form-group">
+                <input type="number" class="form-control" placeholder="Precio total" formControlName="ReservationTotalPrice">
+            </div>
+
+            <div class="checkbox">
+                <label>Pagado<input type="checkbox" class="form-control" formControlName="ReservationAlreadyPaid"></label>
+            </div>
+            <div class="checkbox">
+                <label>Confirmado<input type="checkbox" class="form-control" formControlName="ReservationConfirmed"></label>
+            </div>
+            <button type="submit" class="btn btn-primary"> Guardar</button>
+        </form>
+    </div>
+</div>

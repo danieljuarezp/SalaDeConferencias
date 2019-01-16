@@ -123,7 +123,25 @@ export class GetCustomersComponent implements OnInit {
   GetLastTenReservation(customerId: number) {
     const url = `${this.urlService}/GetLastTenReservationByCustomerId/${customerId}`;
     fetch(url)
-    .then(console.log)
+    .then(result => result.json())
+    .then(reservations => {
+      console.log(reservations);
+      let reservationsHTML = '<ul class="list-group">';
+      reservations.forEach(element => {
+        const startDate = new Date(element.startTime);
+        const endDate = new Date(element.endTime);
+        reservationsHTML += `<li class="list-group-item">Fecha Inicio: <strong>${startDate.toLocaleString()}</strong>
+                                Fecha Fin: <strong>${endDate.toLocaleString()}</strong>
+                                Precio total: <strong>${element.totalPrice}</strong></li>`;
+      });
+      reservationsHTML += '</ul>';
+      Swal({
+        title: 'Últimas 10 reservaciones',
+        type: 'info',
+        html: reservationsHTML,
+        showCloseButton: true,
+      });
+    })
     .catch(console.error);
   }
 

@@ -120,26 +120,23 @@ namespace EventHall.Controllers
         {
             try
             {
-                Customer customer = db.Customers.FirstOrDefault(q => q.CustomerId == id);
+                bool validDeleted = db.Reservations.Any(q => q.CustomerId == id && (!q.AlreadyPaid || !q.Confirmed));
 
-                if (customer.Reservations != null)
+                if (validDeleted)
                 {
-                    if (customer.Reservations.Any(q => !q.Confirmed))
-                    {
-                        return BadRequest();
-                    }
-
-                    ICollection<Reservation> reservationsByCustomer = customer.Reservations;
-
-                    customer.Reservations.Clear();
-
-                    foreach (Reservation reservaation in reservationsByCustomer)
-                    {
-                        db.Reservations.Remove(reservaation);
-                    }
+                    return BadRequest("No se puede eliminar este cliente tiene pendientes con sus reservaciones");
                 }
 
+                Customer customer = db.Customers.FirstOrDefault(q => q.CustomerId == id);
                 db.Customers.Remove(customer);
+
+                IQueryable<Reservation> reservations = db.Reservations.Where(q => q.CustomerId == id);
+
+                foreach (Reservation reservation in reservations)
+                {
+                    db.Reservations.Remove(reservation);
+                }
+
                 db.SaveChanges();
                 return Ok();
             }
